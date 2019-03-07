@@ -13,7 +13,7 @@ from functools import partial
 from qgis.PyQt.QtCore import Qt, QTimer
 from qgis.PyQt.QtGui import (QIcon,
                              QKeySequence,
-                             QPixmap,
+                             QScreen,
                              QPainter,
                              QPen,
                              QBrush
@@ -191,7 +191,8 @@ class LessonsCreator(object):
 
     timer = None
     def _createScreenshot(self, obj, rect):
-        pixmap = QPixmap.grabWindow(obj.winId()).copy()
+        screen = QgsApplication.instance().primaryScreen()
+        pixmap = screen.grabWindow(obj.winId()).copy()
         if rect is not None:
             painter = QPainter()
             painter.begin(pixmap)
